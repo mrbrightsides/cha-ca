@@ -102,6 +102,16 @@ with st.sidebar:
     """)
 
 import streamlit.components.v1 as components
+components.html(f"""
+    <div style="height: 800px; overflow: hidden; position: relative;">
+        <iframe src="{src}"
+                style="width:100%; height:{800 + 110 + 15}px; border:none; position:relative; top:-110px; overflow:hidden;"
+                sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-downloads"
+                allow="geolocation; microphone; camera; midi; encrypted-media; autoplay; clipboard-write; picture-in-picture; fullscreen; display-capture; payment; accelerometer; gyroscope; storage-access"
+        ></iframe>
+    </div>
+""", height=800)
+
 
 def embed_iframe(src, hide_top_px=100, hide_bottom_px=0, height=1600):
     components.html(f"""
@@ -150,4 +160,4 @@ def embed_iframe(src, hide_top_px=100, hide_bottom_px=0, height=1600):
     </div>
     """, height=height + hide_top_px + hide_bottom_px)
     
-embed_iframe("https://ohara.ai/mini-apps/e91b4fa0-5816-4e95-9fe8-edd1eb0a8b68", hide_top_px=110, hide_bottom_px=20, height=800)
+embed_iframe("https://ohara.ai/mini-apps/e91b4fa0-5816-4e95-9fe8-edd1eb0a8b68", hide_top_px=110, hide_bottom_px=30, height=800)
