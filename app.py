@@ -134,22 +134,26 @@ def embed_iframe(src, hide_top_px=100, hide_bottom_px=0, height=800):
             from {{ opacity: 0; transform: translateY(12px); }}
             to {{ opacity: 1; transform: translateY(0); }}
         }}
+        /* Tambahkan agar body dan html tidak overflow */
         html, body {{
             margin: 0; padding: 0; overflow: hidden;
             height: 100%;
         }}
     </style>
     
+    <!-- Desktop view -->
     <div class="hide-on-mobile" style="height:{height}px; overflow:hidden; position:relative;">
         <iframe src="{src}" 
                 style="width:100%; height:{total_height}px; border:none; position:relative; top:-{hide_top_px}px; overflow:hidden;">
         </iframe>
     </div>
     
+    <!-- Mobile fallback -->
     <div class="show-on-mobile">
         📱 Tampilan ini tidak tersedia di perangkat seluler.<br>
         Silakan buka lewat laptop atau desktop untuk pengalaman penuh 💻
     </div>
     """, height=height)
-
+    
+# Panggil fungsi dengan param 
 embed_iframe("https://ohara.ai/mini-apps/e91b4fa0-5816-4e95-9fe8-edd1eb0a8b68", hide_top_px=110, hide_bottom_px=15, height=800)
