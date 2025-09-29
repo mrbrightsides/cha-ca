@@ -102,62 +102,33 @@ with st.sidebar:
     """)
 
 import streamlit.components.v1 as components
-components.html(f"""
-    <div style="height: 800px; overflow: hidden; position: relative;">
-        <iframe src="{src}"
-                style="width:100%; height:{800 + 110 + 15}px; border:none; position:relative; top:-110px; overflow:hidden;"
-                sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-downloads"
-                allow="geolocation; microphone; camera; midi; encrypted-media; autoplay; clipboard-write; picture-in-picture; fullscreen; display-capture; payment; accelerometer; gyroscope; storage-access"
-        ></iframe>
-    </div>
-""", height=800)
 
-
-def embed_iframe(src, hide_top_px=100, hide_bottom_px=0, height=1600):
+def embed_iframe(src, hide_top_px=100, hide_bottom_px=0, height=800):
     components.html(f"""
     <style>
         @media (max-width: 768px) {{
-            .hide-on-mobile {{
-                display: none !important;
-            }}
-            .show-on-mobile {{
-                display: block !important;
-                padding: 24px 12px;
-                background: #ffecec;
-                color: #d10000;
-                font-weight: bold;
-                text-align: center;
-                border-radius: 12px;
-                font-size: 1.2em;
-                margin-top: 24px;
-                animation: fadeIn 0.6s ease-in-out;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-            }}
+            .hide-on-mobile {{ display: none !important; }}
+            .show-on-mobile {{ display: block !important; ... }}
         }}
         @media (min-width: 769px) {{
-            .show-on-mobile {{
-                display: none !important;
-            }}
-        }}
-        @keyframes fadeIn {{
-            from {{ opacity: 0; transform: translateY(12px); }}
-            to {{ opacity: 1; transform: translateY(0); }}
+            .show-on-mobile {{ display: none !important; }}
         }}
     </style>
 
-    <!-- Desktop view -->
     <div class="hide-on-mobile" style="height:{height}px; overflow:hidden; position:relative;">
         <iframe src="{src}" 
-                style="width:100%; height:calc(100% + {hide_top_px + hide_bottom_px}px); 
+                style="width:100%; height:{height + hide_top_px + hide_bottom_px}px; 
                        border:none; position:relative; top:-{hide_top_px}px;">
         </iframe>
     </div>
-
-    <!-- Mobile fallback -->
     <div class="show-on-mobile">
         📱 Tampilan ini tidak tersedia di perangkat seluler.<br>
         Silakan buka lewat laptop atau desktop untuk pengalaman penuh 💻
     </div>
-    """, height=height + hide_top_px + hide_bottom_px)
-    
-embed_iframe("https://ohara.ai/mini-apps/e91b4fa0-5816-4e95-9fe8-edd1eb0a8b68", hide_top_px=110, hide_bottom_px=30, height=800)
+    """, height=height)
+
+# URL Ohara
+iframe_url = "https://ohara.ai/mini-apps/e91b4fa0-5816-4e95-9fe8-edd1eb0a8b68"
+
+# Panggil fungsi
+embed_iframe(iframe_url, hide_top_px=110, hide_bottom_px = 20, height=800)
